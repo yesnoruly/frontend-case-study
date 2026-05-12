@@ -11,14 +11,14 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 	return (
 		<Popover>
 			<PopoverTrigger>
-				<div className={cn('size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color', props.className)}
-				     ref={ref}>
+				<div className={cn('size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color', props.className)} ref={ref}>
 					<span className="text-xs text-zinc-400 font-medium">[n]</span>
 				</div>
 			</PopoverTrigger>
+
 			<PopoverContent>
 				<pre>{JSON.stringify({ seatData: null }, null, 2)}</pre>
-				
+
 				<footer className="flex flex-col">{
 					isInCart ? (
 						<Button disabled variant="destructive" size="sm">
