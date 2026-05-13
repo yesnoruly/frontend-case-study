@@ -1,13 +1,8 @@
 import { Button } from "./ui/button";
-import { $event, fetchEventFx } from "./api/event";
+import { $event } from "./api/event";
 import { useUnit } from "effector-react";
-import { useEffect } from "react";
 
 export const Aside = () => {
-
-    useEffect(() => {
-        fetchEventFx();
-    }, [])
 
     const event = useUnit($event); 
 

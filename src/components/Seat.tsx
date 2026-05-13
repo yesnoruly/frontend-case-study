@@ -3,16 +3,19 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils.ts';
 import React from 'react';
 
-interface SeatProps extends React.HTMLAttributes<HTMLElement> {
+type SeatProps = {
+	place?: number
+	className?: string,
 }
 
 export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
 	const isInCart = false;
+
 	return (
 		<Popover>
 			<PopoverTrigger>
 				<div className={cn('size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color', props.className)} ref={ref}>
-					<span className="text-xs text-zinc-400 font-medium">[n]</span>
+					<span className="text-xs text-zinc-400 font-medium">{props.place}</span>
 				</div>
 			</PopoverTrigger>
 
@@ -21,11 +24,11 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 
 				<footer className="flex flex-col">{
 					isInCart ? (
-						<Button disabled variant="destructive" size="sm">
+						<Button variant="destructive" size="sm">
 							Remove from cart
 						</Button>
 					) : (
-						<Button disabled variant="default" size="sm">
+						<Button variant="default" size="sm">
 							Add to cart
 						</Button>
 					)

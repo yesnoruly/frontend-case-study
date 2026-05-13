@@ -12,7 +12,7 @@ export const Header = (props: HeaderProps) => {
     const isLoggedIn = true;
 
     return (
-        <nav className="sticky bg-gray-100/30 top-0 left-0 right-0 flex justify-center">
+        <nav className="sticky bg-gray-100/95 top-0 left-0 right-0 flex justify-center">
             {/* inner content */}
             <div className="max-w-screen-lg p-4 grow flex items-center justify-between gap-3">
                 {/* application/author image/logo placeholder */}
@@ -28,7 +28,7 @@ export const Header = (props: HeaderProps) => {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button variant="ghost">
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 z-999">
                                             <Avatar>
                                                 <AvatarFallback>{props.userName?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                                             </Avatar>
