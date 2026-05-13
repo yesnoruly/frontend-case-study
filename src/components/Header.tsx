@@ -12,7 +12,7 @@ export const Header = (props: HeaderProps) => {
     const isLoggedIn = true;
 
     return (
-        <nav className="sticky top-0 left-0 right-0 flex justify-center">
+        <nav className="sticky bg-gray-100/30 top-0 left-0 right-0 flex justify-center">
             {/* inner content */}
             <div className="max-w-screen-lg p-4 grow flex items-center justify-between gap-3">
                 {/* application/author image/logo placeholder */}
@@ -40,13 +40,11 @@ export const Header = (props: HeaderProps) => {
                                         </div>
                                     </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-[250px]">
+                                <DropdownMenuContent className="w-[250px] bg-gray-200 rounded-md shadow-sm p-2">
                                     <DropdownMenuLabel>{props.userName}</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuGroup>
-                                        <DropdownMenuItem>
-                                            Logout
-                                        </DropdownMenuItem>
+                                        <Button variant='ghost'>Logout</Button>
                                     </DropdownMenuGroup>
                                 </DropdownMenuContent>
                             </DropdownMenu>
