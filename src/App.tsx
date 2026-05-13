@@ -62,14 +62,17 @@ function App() {
 					<div className="bg-gray-100 rounded-md grow self-stretch shadow-sm" style={{}}>
 						{/*	seating map */}
 						{
-							grid
+							grid.length > 0
 								? grid.map((row, rowIndex) => {
 									return <div key={rowIndex} className="flex items-center justify-center gap-2 mb-2">
 										{
 											row.seats?.map((seat, seatIndex) => {
-												return <Seat
+												return <Seat	
+													ticketTypeId={seat.seatData?.ticketTypeId}
 													key={`${rowIndex}-${seatIndex}`}
+													row={row.seatRow}
 													place={seat.place}
+													status={seat.status}
 													className={`w-8 h-8 rounded flex items-center justify-center text-xs ${seat.status === 'taken' ? ' bg-gray-300 hover:bg-slate-500 text-white cursor-text' : 'text-gray-600 cursor-pointer'
 														}`}
 												/>
@@ -88,9 +91,18 @@ function App() {
 												/>
 											))}
 										</div>
-									))}
+									))}-
 								</div>
 						}
+
+						<div className="flex-grow-1">
+							<p className='text-sm text-zinc-500 mt-auto'>
+								[] - Regular ticket
+							</p>
+							<p className="text-sm text-zinc-500 mt-2">
+								[V] - VIP Ticket
+							</p>
+						</div>
 					</div>
 
 					<Aside />

@@ -4,7 +4,7 @@ import { fetchEventFx } from './event.ts';
 export type TicketType = {
     id: string,
     name: string,
-    price: number
+    price: number,
 }
 
 export type Seat = {
@@ -19,7 +19,7 @@ export type SeatRow = {
 }
 
 export type TicketsResponse = {
-    ticketsTypes: TicketType[],
+    ticketTypes: TicketType[],
     seatRows: SeatRow[],
 }
 
@@ -29,6 +29,17 @@ export const fetchTicketsFx = createEffect<string, TicketsResponse>((id: string)
 
 export const $tickets = createStore<TicketsResponse | null>(null)
     .on(fetchTicketsFx.doneData, (_, data) => data)
+
+export const $vipTicketTypeId = $tickets.map(
+    tickets => tickets?.ticketTypes[0]?.id ?? null
+)
+
+export const $ticketPrice = $tickets.map(
+    tickets => ({
+        vipPrice: tickets?.ticketTypes[0]?.price ?? null,
+        regularPrice: tickets?.ticketTypes[1]?.price ?? null
+    })
+)
 
 sample({
     clock: fetchEventFx.doneData,
