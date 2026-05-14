@@ -30,6 +30,7 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 		place: props.place!,
 		row: props.row!,
 		price: isVipPrice!,
+		isVip: isVip!,
 	}
 
 	return (

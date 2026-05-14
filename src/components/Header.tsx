@@ -1,15 +1,17 @@
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { Button } from "./ui/button";
+import { AuthModal } from './AuthModal'
 
-type HeaderProps = {
-    userName?: string,
-    userEmail?: string
-}
+import { useUnit } from 'effector-react'
 
-export const Header = (props: HeaderProps) => {
+import { $isLoggedIn, $user, openAuth, logout } from "./model/auth";
 
-    const isLoggedIn = true;
+export const Header = () => {
+
+    const isLoggedIn = useUnit($isLoggedIn);
+    const user = useUnit($user)
+    const username = [user?.firstName, user?.lastName].filter(Boolean).join(' ')
 
     return (
         <nav className="sticky bg-gray-100/95 top-0 left-0 right-0 flex justify-center">
@@ -30,32 +32,36 @@ export const Header = (props: HeaderProps) => {
                                     <Button variant="ghost">
                                         <div className="flex items-center gap-2 z-999">
                                             <Avatar>
-                                                <AvatarFallback>{props.userName?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                                <AvatarFallback>{username.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                                             </Avatar>
 
                                             <div className="flex flex-col text-left">
-                                                <span className="text-sm font-medium">{props.userName}</span>
-                                                <span className="text-xs text-zinc-500">{props.userEmail}</span>
+                                                <span className="text-sm font-medium">{username}</span>
+                                                <span className="text-xs text-zinc-500">{user?.email}</span>
                                             </div>
                                         </div>
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-[250px] bg-gray-200 rounded-md shadow-sm p-2">
-                                    <DropdownMenuLabel>{props.userName}</DropdownMenuLabel>
+                                    <DropdownMenuLabel>{username}</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuGroup>
-                                        <Button variant='ghost'>Logout</Button>
+                                        <DropdownMenuItem>
+                                            <Button onClick={() => logout()} variant='ghost'>Logout</Button>
+                                        </DropdownMenuItem>
                                     </DropdownMenuGroup>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         ) : (
-                            <Button disabled variant="secondary">
+                            <Button variant="secondary" onClick={() => openAuth()}>
                                 Login or register
                             </Button>
                         )
                     }
                 </div>
             </div>
+
+            <AuthModal />
         </nav>
     )
 }

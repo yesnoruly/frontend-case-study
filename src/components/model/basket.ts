@@ -5,6 +5,7 @@ export type CartItem = {
     place: number,
     row: number,
     price: number,
+    isVip: boolean,
 }
 
 export type CartStoreType = {

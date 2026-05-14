@@ -55,7 +55,7 @@ function App() {
 	return (
 		<div className="flex flex-col grow bg-gray-100 bg-zinc-b text-black">
 
-			<Header userName='Roman Karvatskyi' userEmail='roman.karvatskij@gmail.com' />
+			<Header />
 
 			{/* main body (wrapper) */}
 			<main className="grow flex flex-col justify-center">
