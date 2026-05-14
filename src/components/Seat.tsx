@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button.tsx';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover.tsx';
-import { cn } from '@/lib/utils.ts';
+import { cn } from '@/components/lib/utils.ts';
 import React from 'react';
 
 import { useUnit } from 'effector-react';
 
-import { $vipTicketTypeId, $ticketPrice } from './api/tickets.ts';
+import { $vipTicketTypeId, $ticketPrice } from './model/tickets.ts';
+import { $cartStore, addToCart, removeFromCart } from './model/basket.ts'
 
 type SeatProps = {
 	place?: number,
@@ -13,21 +14,28 @@ type SeatProps = {
 	className?: string,
 	status: 'available' | 'taken',
 	ticketTypeId?: string,
+	seatId?: string,
 }
 
 export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
-	const isInCart = false;
 
-	const vipTicketTypeId = useUnit($vipTicketTypeId);
+	const [vipTicketTypeId, ticketPrice, cartStore] = useUnit([$vipTicketTypeId, $ticketPrice, $cartStore])
 
-	const ticketPrice = useUnit($ticketPrice);
-
+	const isInCart = cartStore.inCart.some(item => item.seatId === props.seatId)
 	const isVip = props.ticketTypeId === vipTicketTypeId;
+	const isVipPrice = isVip ? ticketPrice.vipPrice : ticketPrice.regularPrice;
+
+	const item = {
+		seatId: props.seatId!,
+		place: props.place!,
+		row: props.row!,
+		price: isVipPrice!,
+	}
 
 	return (
 		<Popover>
 			<PopoverTrigger>
-				<div className={cn('size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color', props.className)} ref={ref}>
+				<div className={cn('size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color', isInCart && cn('bg-green-300 hover:bg-green-500'), props.className)} ref={ref}>
 					<span className="text-xs text-zinc-400 font-medium">{isVip ? '[V]' : '[ ]'}</span>
 				</div>
 			</PopoverTrigger>
@@ -35,7 +43,7 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 			<PopoverContent>
 				<p>Row: {props.row}</p>
 				<p>Place: {props.place}</p>
-				<p>{isVip ? ticketPrice.vipPrice : ticketPrice.regularPrice} Kč</p>
+				<p>{isVipPrice} Kč</p>
 
 				<footer className="flex flex-col gap-1.5 mt-4">{
 					props.status === 'taken'
@@ -45,11 +53,11 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 							</Button>
 						)
 						: isInCart ? (
-							<Button variant="destructive" size="sm">
+							<Button variant="destructive" size="sm" onClick={() => removeFromCart(item)}>
 								Remove from cart
 							</Button>
 						) : (
-							<Button variant="default" size="sm">
+							<Button variant="default" size="sm" onClick={() => addToCart(item)}>
 								Add to cart
 							</Button>
 						)

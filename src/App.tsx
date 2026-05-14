@@ -7,6 +7,7 @@ import { Nav } from './components/Nav';
 import { useUnit } from 'effector-react';
 
 import { $tickets } from './components/api/tickets.ts';
+import { $cartStore } from './components/model/basket'
 import type { Seat as SeatType, TicketsResponse as TicketsResponseType } from './components/api/tickets.ts';
 
 type GridSeat = {
@@ -49,6 +50,8 @@ function App() {
 
 	const grid: GridRow[] = tickets ? buildGrid(tickets) : [];
 
+	const cardStore = useUnit($cartStore);
+
 	return (
 		<div className="flex flex-col grow bg-gray-100 bg-zinc-b text-black">
 
@@ -68,6 +71,7 @@ function App() {
 										{
 											row.seats?.map((seat, seatIndex) => {
 												return <Seat	
+													seatId={seat.seatData?.seatId}
 													ticketTypeId={seat.seatData?.ticketTypeId}
 													key={`${rowIndex}-${seatIndex}`}
 													row={row.seatRow}
@@ -91,13 +95,13 @@ function App() {
 												/>
 											))}
 										</div>
-									))}-
+									))}
 								</div>
 						}
 
 						<div className="flex-grow-1">
 							<p className='text-sm text-zinc-500 mt-auto'>
-								[] - Regular ticket
+								[ ] - Regular ticket
 							</p>
 							<p className="text-sm text-zinc-500 mt-2">
 								[V] - VIP Ticket
@@ -110,7 +114,7 @@ function App() {
 				</div>
 			</main>
 
-			<Nav totalTickets={0} totalPrice={0} />
+			<Nav totalTickets={cardStore.quantity} totalPrice={cardStore.totalPrice} />
 		</div>
 	);
 }
