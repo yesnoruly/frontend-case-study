@@ -18,7 +18,7 @@ export const Aside = () => {
             <p className="text-sm text-zinc-500">{event?.description}</p>
             {/* Date From - To */}
             <p className="text-sm text-zinc-500">
-                {event?.dateFrom ? new Date(event.dateFrom).toLocaleString('cz-CZ') : ''} - {event?.dateTo ? new Date(event.dateTo).toLocaleString('cz-CZ') : ''}
+                {event?.dateFrom ? new Date(event.dateFrom).toLocaleString('cs-CZ') : ''} - {event?.dateTo ? new Date(event.dateTo).toLocaleString('cs-CZ') : ''}
             </p>
             {/* add to calendar button */}
             <Button variant="secondary">

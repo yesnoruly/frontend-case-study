@@ -86,7 +86,7 @@ function App() {
 								})
 								:
 								<div className="flex flex-col gap-2 p-4">
-									{[1, 2, 3, 4].map(i => (
+									{[1, 2, 3, 4, 5, 6].map(i => (
 										<div key={i} className="flex justify-center gap-2">
 											{[1, 2, 3, 4, 5, 6, 7, 8].map(j => (
 												<div
@@ -100,10 +100,10 @@ function App() {
 						}
 
 						<div className="flex-grow-1">
-							<p className='text-sm text-zinc-500 mt-auto'>
+							<p className='text-sm text-zinc-500'>
 								[ ] - Regular ticket
 							</p>
-							<p className="text-sm text-zinc-500 mt-2">
+							<p className="text-sm text-zinc-500">
 								[V] - VIP Ticket
 							</p>
 						</div>
