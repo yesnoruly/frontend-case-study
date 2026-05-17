@@ -1,17 +1,22 @@
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
+import { Dialog } from '@/components/ui/dialog'
 import { Button } from "./ui/button";
-import { AuthModal } from './AuthModal'
 
 import { useUnit } from 'effector-react'
 
-import { $isLoggedIn, $user, openAuth, logout } from "./model/auth";
+import { $isLoggedIn, $user, logout, $isAuthOpen, openAuth, closeAuth } from "./model/auth";
+
+import { LoginForm } from './LoginForm';
 
 export const Header = () => {
 
+    const isOpen = useUnit($isAuthOpen)
     const isLoggedIn = useUnit($isLoggedIn);
-    const user = useUnit($user)
-    const username = [user?.firstName, user?.lastName].filter(Boolean).join(' ')
+    const user = useUnit($user);
+    
+    const username = [user?.firstName, user?.lastName].filter(Boolean).join(' ');
+
 
     return (
         <nav className="sticky bg-gray-100/95 top-0 left-0 right-0 flex justify-center">
@@ -61,7 +66,11 @@ export const Header = () => {
                 </div>
             </div>
 
-            <AuthModal />
+            <Dialog open={isOpen} onOpenChange={open => open ? openAuth() : closeAuth()} >
+
+                <LoginForm />
+
+            </Dialog >
         </nav>
     )
 }
