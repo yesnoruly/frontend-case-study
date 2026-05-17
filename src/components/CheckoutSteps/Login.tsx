@@ -38,7 +38,7 @@ export const Login = ({ onBack, onSubmit, loading }: LoginProps) => {
             <Button type='submit' disabled={loading}>
                 {loading ? 'Loading' : 'Login'}
             </Button>
-            <Button type='submit' variant='ghost' onClick={onBack}>
+            <Button type='button' variant='ghost' onClick={onBack}>
                 Back
             </Button>
         </form>
