@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-type GuestData = {
+export type GuestDataTypes = {
     firstName: string,
     lastName: string,
     email: string
 }
 
 type GuestProps = {
-    onSubmit: (firstName: string, lastName: string, email: string) => void,
+    onSubmit: (data: GuestDataTypes) => void,
     onBack: () => void
 }
 
@@ -20,8 +20,8 @@ export const Guest = ({ onSubmit, onBack }: GuestProps) => {
     const [email, setEmail] = useState('')
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault;
-        onSubmit(firstName, lastName, email)
+        e.preventDefault();
+        onSubmit({firstName, lastName, email} )
     }
 
     return (
