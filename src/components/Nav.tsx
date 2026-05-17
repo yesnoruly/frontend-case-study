@@ -7,7 +7,7 @@ type NavProps = {
 
 export const Nav = (props: NavProps) => {
     return (
-        <nav className="sticky bottom-0 left-0 right-0 bg-gray-100 text-black flex justify-center"> 
+        <nav className="bg-gray-100 text-black flex justify-center"> 
             {/* inner content */}
             <div className="max-w-screen-lg p-6 flex justify-between items-center gap-4 grow">
                 {/* total in cart state */}
