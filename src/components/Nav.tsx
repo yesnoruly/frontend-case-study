@@ -1,5 +1,8 @@
 import { Button } from "./ui/button";
 
+import { CheckoutModal } from "./CheckoutModal";
+import { openCheckout } from "./model/checkout";
+
 type NavProps = {
     totalTickets?: number,
     totalPrice?: number
@@ -17,10 +20,12 @@ export const Nav = (props: NavProps) => {
                 </div>
 
                 {/* checkout button */}
-                <Button variant="default">
+                <Button variant="default" onClick={() => openCheckout()} disabled={props.totalTickets === 0}>
                     Checkout now
                 </Button>
             </div>
+
+            <CheckoutModal />
         </nav>
     )
 }
