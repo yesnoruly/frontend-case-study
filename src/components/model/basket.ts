@@ -2,6 +2,7 @@ import { createEvent, createStore } from 'effector';
 
 export type CartItem = {
     seatId: string,
+    ticketTypeId: string,
     place: number,
     row: number,
     price: number,

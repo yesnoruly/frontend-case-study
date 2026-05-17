@@ -27,6 +27,7 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 
 	const item = {
 		seatId: props.seatId!,
+		ticketTypeId: props.ticketTypeId!,
 		place: props.place!,
 		row: props.row!,
 		price: isVipPrice!,
