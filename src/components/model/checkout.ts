@@ -1,7 +1,9 @@
 import { createStore, createEvent, sample } from 'effector'
 import { $isLoggedIn, loginFx } from './auth'
 
-export type CheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success'
+import { createOrderFx } from './order'
+
+export type CheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error'
 
 export const $isCheckoutOpen = createStore(false)
 export const $checkoutStep = createStore<CheckoutStep>('payment');
@@ -34,4 +36,18 @@ sample({
     filter: (isOpen) => isOpen,
     fn: () => 'payment' as CheckoutStep,
     target: $checkoutStep
+})
+
+// When data is successfully receive -> succes step
+sample({
+    clock: createOrderFx.done,
+    fn: () => 'success' as CheckoutStep,
+    target: $checkoutStep,
+})
+
+// when fail -> throw error
+sample({
+    clock: createOrderFx.fail,
+    fn: () => 'error' as CheckoutStep,
+    target: $checkoutStep,
 })
