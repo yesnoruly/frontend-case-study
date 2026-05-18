@@ -20,7 +20,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <DialogContent className='bg-gray-900'>
+        <DialogContent className='bg-black'>
 
             <DialogHeader>
                 <DialogTitle>Login</DialogTitle>
