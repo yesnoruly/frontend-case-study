@@ -3,12 +3,12 @@ import { Button } from "./ui/button";
 import { CheckoutModal } from "./CheckoutModal";
 import { openCheckout } from "./model/checkout";
 
-type NavProps = {
+type TNavProps = {
     totalTickets?: number,
     totalPrice?: number
 }
 
-export const Nav = (props: NavProps) => {
+export const Nav = (props: TNavProps) => {
     return (
         <nav className="bg-gray-100 text-black flex justify-center"> 
             {/* inner content */}

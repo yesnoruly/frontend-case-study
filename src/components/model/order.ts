@@ -1,29 +1,29 @@
 import { createEffect, createStore } from 'effector'
 
-type OrderTicket = {
+type TOrderTicket = {
     ticketTypeId: string,
     seatId: string
 }
 
-export type OrderUser = {
+export type TOrderUser = {
     email: string,
     firstName: string,
     lastName: string
 }
 
-type OrderInput = {
+type TOrderInput = {
     eventId: string,
-    tickets: OrderTicket[],
-    user: OrderUser
+    tickets: TOrderTicket[],
+    user: TOrderUser
 }
 
-type OrderResponse = {
+type TOrderResponse = {
     message: string,
     orderId: string,
     totalAmount: number
 }
 
-export const createOrderFx = createEffect<OrderInput, OrderResponse>(data => 
+export const createOrderFx = createEffect<TOrderInput, TOrderResponse>(data => 
     fetch('https://nfctron-frontend-seating-case-study-2024.vercel.app/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -31,7 +31,7 @@ export const createOrderFx = createEffect<OrderInput, OrderResponse>(data =>
     }).then(res => res.json())
 )
 
-export const $orderResult = createStore<OrderResponse | null>(null)
+export const $orderResult = createStore<TOrderResponse | null>(null)
 
 $orderResult
     .on(createOrderFx.doneData, (_, data) => data)

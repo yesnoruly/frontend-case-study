@@ -3,18 +3,18 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-export type GuestDataTypes = {
+export type TGuestData = {
     firstName: string,
     lastName: string,
     email: string
 }
 
-type GuestProps = {
-    onSubmit: (data: GuestDataTypes) => void,
+type TGuestProps = {
+    onSubmit: (data: TGuestData) => void,
     onBack: () => void
 }
 
-export const Guest = ({ onSubmit, onBack }: GuestProps) => {
+export const Guest = ({ onSubmit, onBack }: TGuestProps) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')

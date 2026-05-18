@@ -3,13 +3,13 @@ import { useState } from 'react'
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-type LoginProps = {
+type TLoginProps = {
     onSubmit: (email: string, password: string) => void,
     onBack: () => void,
     loading?: boolean
 }
 
-export const Login = ({ onBack, onSubmit, loading }: LoginProps) => {
+export const Login = ({ onBack, onSubmit, loading }: TLoginProps) => {
 
     const [email, setEmail] = useState('frontend@nfctron.com');
     const [password, setPassword] = useState('Nfctron2025');

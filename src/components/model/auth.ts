@@ -1,22 +1,22 @@
 import { createEffect, createStore, createEvent } from 'effector';
 
-type LoginInput = {
+type TLoginInput = {
     email: string,
     password: string,
 }
 
-type User = {
+type TUser = {
     firstName: 'string';
     lastName: 'string',
     email: 'string',
 }
 
-type LoginResponse = {
+type TLoginResponse = {
     message: 'string',
-    user: User;
+    user: TUser;
 }
 
-export const loginFx = createEffect<LoginInput, LoginResponse>((data) => 
+export const loginFx = createEffect<TLoginInput, TLoginResponse>((data) => 
     fetch('https://nfctron-frontend-seating-case-study-2024.vercel.app/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -26,7 +26,7 @@ export const loginFx = createEffect<LoginInput, LoginResponse>((data) =>
 
 export const logout = createEvent();
 
-export const $user = createStore<User | null>(null)
+export const $user = createStore<TUser | null>(null)
     .on(loginFx.doneData, (_, data) => data.user)
     .on(logout, () => null)   
 

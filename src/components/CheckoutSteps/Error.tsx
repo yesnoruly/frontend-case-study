@@ -1,11 +1,11 @@
 import { Button } from "../ui/button"
 
-type ErrorProps = {
+type TErrorProps = {
     onBack: () => void,
     onRetry: () => void
 }
 
-export const Error = ({onBack, onRetry}: ErrorProps) => {
+export const Error = ({onBack, onRetry}: TErrorProps) => {
     return (
         <div className="flex flex-col gap-3">
             <p>Something went wrong, please try again later</p>

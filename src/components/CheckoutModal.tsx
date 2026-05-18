@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 
 // Steps
 import { Options } from './CheckoutSteps/Options'
-import { Guest, GuestDataTypes } from './CheckoutSteps/Guest'
+import { Guest, TGuestData } from './CheckoutSteps/Guest'
 import { Login } from './CheckoutSteps/Login'
 import { Payment } from './CheckoutSteps/Payment'
 import { Success } from './CheckoutSteps/Success'
@@ -16,7 +16,7 @@ import { createOrderFx } from './model/order'
 import { $event } from './api/event'
 import { $user, $isLoggedIn, loginFx } from './model/auth'
 
-import { OrderUser as OrderUserTypes } from './model/order'
+import { TOrderUser } from './model/order'
 
 import { useUnit } from 'effector-react';
 import { useState } from 'react';
@@ -35,13 +35,13 @@ export const CheckoutModal = () => {
 
     const loginLoading = useUnit(loginFx.pending)
 
-    const [guestData, setGuestData] = useState<GuestDataTypes | null>(null)
+    const [guestData, setGuestData] = useState<TGuestData | null>(null)
 
     const handleLogin = (email: string, password: string) => {
         loginFx({ email, password })
     }
 
-    const handleGuestContinue = (data: GuestDataTypes) => {
+    const handleGuestContinue = (data: TGuestData) => {
         setGuestData(data)
         setCheckoutStep('payment')
     }
@@ -51,7 +51,7 @@ export const CheckoutModal = () => {
 
         const customer = isLoggedIn
             ? { firstName: user!.firstName, lastName: user!.lastName, email: user!.email }
-            : guestData as OrderUserTypes;
+            : guestData as TOrderUser;
 
         createOrderFx({
             eventId: event.eventId,

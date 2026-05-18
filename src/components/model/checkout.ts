@@ -3,14 +3,14 @@ import { $isLoggedIn, loginFx } from './auth'
 
 import { createOrderFx } from './order'
 
-export type CheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error'
+export type TCheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error'
 
 export const $isCheckoutOpen = createStore(false)
-export const $checkoutStep = createStore<CheckoutStep>('payment');
+export const $checkoutStep = createStore<TCheckoutStep>('payment');
 
 export const openCheckout = createEvent();
 export const closeCheckout = createEvent();
-export const setCheckoutStep = createEvent<CheckoutStep>();
+export const setCheckoutStep = createEvent<TCheckoutStep>();
 
 $isCheckoutOpen
     .on(openCheckout, () => true)
@@ -34,20 +34,20 @@ sample({
     clock: loginFx.done,
     source: $isCheckoutOpen,
     filter: (isOpen) => isOpen,
-    fn: () => 'payment' as CheckoutStep,
+    fn: () => 'payment' as TCheckoutStep,
     target: $checkoutStep
 })
 
 // When data is successfully receive -> succes step
 sample({
     clock: createOrderFx.done,
-    fn: () => 'success' as CheckoutStep,
+    fn: () => 'success' as TCheckoutStep,
     target: $checkoutStep,
 })
 
 // when fail -> throw error
 sample({
     clock: createOrderFx.fail,
-    fn: () => 'error' as CheckoutStep,
+    fn: () => 'error' as TCheckoutStep,
     target: $checkoutStep,
 })

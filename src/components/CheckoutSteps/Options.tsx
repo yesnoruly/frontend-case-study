@@ -1,13 +1,13 @@
 import { Button } from '../ui/button'
 
-type OptionsProps = {
+type TOptionsProps = {
     quantity: number,
     totalPrice: number,
     onLogin: () => void,
     onGuest: () => void
 }
 
-export const Options = ({ onLogin, onGuest, quantity, totalPrice }: OptionsProps) => {
+export const Options = ({ onLogin, onGuest, quantity, totalPrice }: TOptionsProps) => {
     return (
         <section className='flex flex-col gap-3'>
             <p className="text-sm text-white">You have {quantity} tickets for {totalPrice} Kč.</p>

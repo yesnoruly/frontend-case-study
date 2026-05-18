@@ -1,10 +1,10 @@
 import { Button } from "../ui/button"
 
-type SuccessProps = {
+type TSuccessProps = {
     onClose: () => void
 }
 
-export const Success = ({onClose}: SuccessProps) => {
+export const Success = ({onClose}: TSuccessProps) => {
     return (
         <div className="text-center flex flex-col gap-3">
             <p className="text-lg">Your order is ready</p>

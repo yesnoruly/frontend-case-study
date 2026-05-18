@@ -8,7 +8,7 @@ import { useUnit } from 'effector-react';
 import { $vipTicketTypeId, $ticketPrice } from './model/tickets.ts';
 import { $cartStore, addToCart, removeFromCart } from './model/cart.ts'
 
-type SeatProps = {
+type TSeatProps = {
 	place?: number,
 	row?: number,
 	className?: string,
@@ -17,7 +17,7 @@ type SeatProps = {
 	seatId?: string,
 }
 
-export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
+export const Seat = React.forwardRef<HTMLDivElement, TSeatProps>((props, ref) => {
 
 	const [vipTicketTypeId, ticketPrice, cartStore] = useUnit([$vipTicketTypeId, $ticketPrice, $cartStore])
 

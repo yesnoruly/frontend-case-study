@@ -2,12 +2,12 @@ import { Button } from '@/components/ui/button';
 
 import { useState } from 'react'
 
-type PaymentType = {
+type TPaymentProps = {
     onPay: () => void,
     totalPrice: number
 }
 
-export const Payment = ({ onPay, totalPrice }: PaymentType) => {
+export const Payment = ({ onPay, totalPrice }: TPaymentProps) => {
 
     const [loading, setLoading] = useState(false);
 

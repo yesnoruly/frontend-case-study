@@ -10,22 +10,22 @@ import { $tickets } from './components/api/tickets.ts';
 import { $cartStore } from './components/model/cart.ts'
 import type { Seat as SeatType, TicketsResponse as TicketsResponseType } from './components/api/tickets.ts';
 
-type GridSeat = {
+type TGridSeat = {
 	place: number,
 	status: 'available' | 'taken',
 	seatData?: void | SeatType | undefined;
 }
 
-type GridRow = {
+type TGridRow = {
 	seatRow: number,
-	seats: GridSeat[]
+	seats: TGridSeat[]
 }
 
 function App() {
 
 	const tickets = useUnit($tickets);
 
-	function buildRowMap(seats: SeatType[], maxSeats: number): GridSeat[] {
+	function buildRowMap(seats: SeatType[], maxSeats: number): TGridSeat[] {
 		const existingMap = new Map(seats.map(seat => [seat.place, seat]))
 
 		return Array.from({ length: maxSeats }, (_, i) => {
@@ -38,7 +38,7 @@ function App() {
 		})
 	}
 
-	function buildGrid(tickets: TicketsResponseType): GridRow[] {
+	function buildGrid(tickets: TicketsResponseType): TGridRow[] {
 
 		const max_seats_in_row = Math.max(...tickets.seatRows.flatMap(row => row.seats.map(s => s.place)), 0)
 
@@ -48,7 +48,7 @@ function App() {
 		}))
 	}
 
-	const grid: GridRow[] = tickets ? buildGrid(tickets) : [];
+	const grid: TGridRow[] = tickets ? buildGrid(tickets) : [];
 
 	const cardStore = useUnit($cartStore);
 
