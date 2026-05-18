@@ -50,7 +50,7 @@ function App() {
 
 	const grid: TGridRow[] = tickets ? buildGrid(tickets) : [];
 
-	const cardStore = useUnit($cartStore);
+	const cartStore = useUnit($cartStore);
 
 	return (
 		<div className="flex flex-col grow bg-gray-100 bg-zinc-b text-black">
@@ -114,7 +114,7 @@ function App() {
 				</div>
 			</main>
 
-			<Nav totalTickets={cardStore.quantity} totalPrice={cardStore.totalPrice} />
+			<Nav totalTickets={cartStore.quantity} totalPrice={cartStore.totalPrice} />
 		</div>
 	);
 }
