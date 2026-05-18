@@ -6,7 +6,7 @@ import React from 'react';
 import { useUnit } from 'effector-react';
 
 import { $vipTicketTypeId, $ticketPrice } from './model/tickets.ts';
-import { $cartStore, addToCart, removeFromCart } from './model/basket.ts'
+import { $cartStore, addToCart, removeFromCart } from './model/cart.ts'
 
 type SeatProps = {
 	place?: number,

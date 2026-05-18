@@ -1,6 +1,6 @@
 import { createEvent, createStore } from 'effector';
 
-export type CartItem = {
+export type TCartItem = {
     seatId: string,
     ticketTypeId: string,
     place: number,
@@ -9,20 +9,20 @@ export type CartItem = {
     isVip: boolean,
 }
 
-export type CartStoreType = {
-    inCart: CartItem[],
+export type TCartStoreType = {
+    inCart: TCartItem[],
     totalPrice: number,
     quantity: number,
 }
 
-export const $cartStore = createStore<CartStoreType>({
+export const $cartStore = createStore<TCartStoreType>({
     inCart: [],
     totalPrice: 0,
     quantity: 0,
 })
 
-export const addToCart = createEvent<CartItem>();
-export const removeFromCart = createEvent<CartItem>();
+export const addToCart = createEvent<TCartItem>();
+export const removeFromCart = createEvent<TCartItem>();
 
 $cartStore
     .on(addToCart, (cart, newItem) => ({

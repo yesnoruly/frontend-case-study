@@ -7,7 +7,7 @@ import { Nav } from './components/Nav';
 import { useUnit } from 'effector-react';
 
 import { $tickets } from './components/api/tickets.ts';
-import { $cartStore } from './components/model/basket'
+import { $cartStore } from './components/model/cart.ts'
 import type { Seat as SeatType, TicketsResponse as TicketsResponseType } from './components/api/tickets.ts';
 
 type GridSeat = {

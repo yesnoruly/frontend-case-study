@@ -11,7 +11,7 @@ import { Error } from './CheckoutSteps/Error'
 
 // Stores and effects
 import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckoutStep } from './model/checkout';
-import { $cartStore } from './model/basket'
+import { $cartStore } from './model/cart'
 import { createOrderFx } from './model/order'
 import { $event } from './api/event'
 import { $user, $isLoggedIn, loginFx } from './model/auth'
