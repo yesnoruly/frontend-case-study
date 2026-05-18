@@ -1,43 +1,23 @@
-import { createEffect, createStore, createEvent } from 'effector';
+import { createStore, createEvent } from 'effector';
 
-type TLoginInput = {
-    email: string,
-    password: string,
-}
+import type { TUser } from '../api/postLogin';
 
-type TUser = {
-    firstName: 'string';
-    lastName: 'string',
-    email: 'string',
-}
+import { loginFx } from '../api/postLogin';
 
-type TLoginResponse = {
-    message: 'string',
-    user: TUser;
-}
-
-export const loginFx = createEffect<TLoginInput, TLoginResponse>((data) => 
-    fetch('https://nfctron-frontend-seating-case-study-2024.vercel.app/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    }).then(res => res.json())
-)
-
+export const openAuth = createEvent();
+export const closeAuth = createEvent();
 export const logout = createEvent();
 
 export const $user = createStore<TUser | null>(null)
     .on(loginFx.doneData, (_, data) => data.user)
-    .on(logout, () => null)   
-
-export const $isLoggedIn = $user.map(user => user !== null)
+    .on(logout, () => null)
 
 export const $isAuthOpen = createStore(false)
 
-export const openAuth = createEvent();
-export const closeAuth = createEvent();
+export const $isLoggedIn = $user.map(user => user !== null)
 
-$isAuthOpen 
+
+$isAuthOpen
     .on(openAuth, () => true)
     .on(closeAuth, () => false)
     .on(loginFx.done, () => false)

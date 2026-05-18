@@ -1,4 +1,4 @@
-import { createEffect, createStore } from 'effector';
+import { createEffect } from 'effector';
 
 export type EventType = {
     eventId: string,
@@ -12,8 +12,5 @@ export type EventType = {
 export const fetchEventFx = createEffect<void, EventType>(() => {
     return fetch('https://nfctron-frontend-seating-case-study-2024.vercel.app/event').then(res => res.json());
 })
-
-export const $event = createStore<EventType | null>(null)
-    .on(fetchEventFx.doneData, (_, data) => data)
 
 fetchEventFx();

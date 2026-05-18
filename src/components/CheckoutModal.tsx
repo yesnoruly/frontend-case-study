@@ -9,15 +9,20 @@ import { Payment } from './CheckoutSteps/Payment'
 import { Success } from './CheckoutSteps/Success'
 import { Error } from './CheckoutSteps/Error'
 
-// Stores and effects
+// Stores
 import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckoutStep } from './model/checkout';
 import { $cartStore } from './model/cart'
-import { createOrderFx } from './model/order'
-import { $event } from './api/event'
-import { $user, $isLoggedIn, loginFx } from './model/auth'
+import { $event } from './model/event'
+import { $user, $isLoggedIn } from './model/auth'
 
-import { TOrderUser } from './model/order'
+// Effects
+import { createOrderFx } from './api/postOrder'
+import { loginFx } from './api/postLogin'
 
+// Types
+import { TOrderUser } from './api/postOrder'
+
+// Utils
 import { useUnit } from 'effector-react';
 import { useState } from 'react';
 

@@ -1,7 +1,9 @@
 import { createStore, createEvent, sample } from 'effector'
-import { $isLoggedIn, loginFx } from './auth'
 
-import { createOrderFx } from './order'
+import { $isLoggedIn } from './auth'
+
+import { loginFx } from '../api/postLogin'
+import { createOrderFx } from '../api/postOrder'
 
 export type TCheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error'
 

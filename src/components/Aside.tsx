@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { $event } from "./api/event";
+import { $event } from "./model/event";
 import { useUnit } from "effector-react";
 
 export const Aside = () => {

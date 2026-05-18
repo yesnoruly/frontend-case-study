@@ -2,7 +2,7 @@ import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/c
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 
-import { loginFx } from './model/auth'
+import { loginFx } from './api/postLogin'
 
 import { useState } from 'react'
 import { useUnit } from 'effector-react'
