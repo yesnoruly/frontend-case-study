@@ -77,8 +77,7 @@ function App() {
 													row={row.seatRow}
 													place={seat.place}
 													status={seat.status}
-													className={`w-8 h-8 rounded flex items-center justify-center text-xs ${seat.status === 'taken' ? ' bg-gray-300 hover:bg-slate-500 text-white cursor-text' : 'text-gray-600 cursor-pointer'
-														}`}
+													className={`w-8 h-8 rounded flex items-center justify-center text-xs}`}
 												/>
 											})
 										}

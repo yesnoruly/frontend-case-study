@@ -36,8 +36,15 @@ export const Seat = React.forwardRef<HTMLDivElement, TSeatProps>((props, ref) =>
 
 	return (
 		<Popover>
-			<PopoverTrigger>
-				<div className={cn('size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color', isInCart && cn('bg-green-300 hover:bg-green-500'), props.className)} ref={ref}>
+			<PopoverTrigger disabled={props.status === 'taken'}>
+				<div
+					className={cn(
+						'size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color',
+						isInCart && 'bg-green-300 hover:bg-green-500',
+						props.status === 'taken' && 'bg-gray-300 hover:bg-slate-500 text-white ',
+						props.className
+					)} ref={ref}
+				>
 					<span className="text-xs text-zinc-400 font-medium">{isVip ? '[V]' : '[ ]'}</span>
 				</div>
 			</PopoverTrigger>
