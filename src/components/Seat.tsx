@@ -36,7 +36,7 @@ export const Seat = React.forwardRef<HTMLDivElement, TSeatProps>((props, ref) =>
 
 	return (
 		<Popover>
-			<PopoverTrigger disabled={props.status === 'taken'}>
+			<PopoverTrigger disabled={props.status === 'taken'} >
 				<div
 					className={cn(
 						'size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 transition-color',
