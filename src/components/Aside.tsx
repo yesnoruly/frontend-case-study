@@ -1,10 +1,24 @@
 import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
+
 import { $event } from "./model/event";
+
 import { useUnit } from "effector-react";
 
 export const Aside = () => {
 
-    const event = useUnit($event); 
+    const event = useUnit($event);
+
+    if (!event) {
+        return (
+            <aside className="w-full max-w-sm bg-gray-100 rounded-md shadow-sm p-3 flex flex-col gap-2">
+                <Skeleton className="h-32 w-full" />
+                <Skeleton className="h-6 w-3/4" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full" />
+            </aside> 
+        )
+    }
 
     return (
         <aside className="w-full max-w-sm bg-gray-100 rounded-md shadow-sm p-3 flex flex-col gap-2">
