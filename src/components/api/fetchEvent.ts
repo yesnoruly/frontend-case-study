@@ -6,7 +6,8 @@ export type EventType = {
     description: string,
     headerImageUrl: string,
     dateFrom: string,
-    dateTo: string
+    dateTo: string,
+    place?: string
 };
 
 export const fetchEventFx = createEffect<void, EventType>(() => {
