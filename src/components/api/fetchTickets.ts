@@ -1,27 +1,27 @@
 import { createEffect } from 'effector';
 
-export type TicketTypeId = {
+export type TTicketTypeId = {
     id: string,
     name: string,
     price: number,
 }
 
-export type Seat = {
+export type TSeat = {
     seatId: string,
     place: number,
     ticketTypeId: string
 }
 
-export type SeatRow = {
+export type TSeatRow = {
     seatRow: number,
-    seats: Seat[]
+    seats: TSeat[]
 }
 
-export type TicketsResponse = {
-    ticketTypes: TicketTypeId[],
-    seatRows: SeatRow[],
+export type TTicketsResponse = {
+    ticketTypes: TTicketTypeId[],
+    seatRows: TSeatRow[],
 }
 
-export const fetchTicketsFx = createEffect<string, TicketsResponse>((id: string) => {
+export const fetchTicketsFx = createEffect<string, TTicketsResponse>((id: string) => {
     return fetch(`https://nfctron-frontend-seating-case-study-2024.vercel.app/event-tickets?eventId=${id}`).then(res => res.json())
 })

@@ -8,12 +8,12 @@ import { useUnit } from 'effector-react';
 
 import { $tickets } from '@/components/model/tickets.ts';
 import { $cart } from './components/model/cart.ts'
-import type { Seat as SeatType, TicketsResponse as TicketsResponseType } from './components/api/fetchTickets.ts';
+import type { TSeat, TTicketsResponse } from './components/api/fetchTickets.ts';
 
 type TGridSeat = {
 	place: number,
 	status: 'available' | 'taken',
-	seatData?: void | SeatType | undefined;
+	seatData?: void | TSeat | undefined;
 }
 
 type TGridRow = {
@@ -25,7 +25,7 @@ function App() {
 
 	const tickets = useUnit($tickets);
 
-	function buildRowMap(seats: SeatType[], maxSeats: number): TGridSeat[] {
+	function buildRowMap(seats: TSeat[], maxSeats: number): TGridSeat[] {
 		const existingMap = new Map(seats.map(seat => [seat.place, seat]))
 
 		return Array.from({ length: maxSeats }, (_, i) => {
@@ -38,7 +38,7 @@ function App() {
 		})
 	}
 
-	function buildGrid(tickets: TicketsResponseType): TGridRow[] {
+	function buildGrid(tickets: TTicketsResponse): TGridRow[] {
 
 		const max_seats_in_row = Math.max(...tickets.seatRows.flatMap(row => row.seats.map(s => s.place)), 0)
 
