@@ -17,7 +17,6 @@ export const Header = () => {
 
     const username = [user?.firstName, user?.lastName].filter(Boolean).join(' ');
 
-
     return (
         <nav className="sticky bg-gray-100/95 top-0 left-0 right-0 flex justify-center">
             {/* inner content */}

@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 
-import { CheckoutModal } from "./CheckoutModal";
+import { Checkout } from "./Checkout";
 import { openCheckout } from "./model/checkout";
 
 type TNavProps = {
@@ -10,7 +10,7 @@ type TNavProps = {
 
 export const Nav = (props: TNavProps) => {
     return (
-        <nav className="bg-gray-100 text-black flex justify-center"> 
+        <nav className="bg-gray-100 text-black flex justify-center">
             {/* inner content */}
             <div className="max-w-screen-lg p-6 flex justify-between items-center gap-4 grow">
                 {/* total in cart state */}
@@ -25,7 +25,7 @@ export const Nav = (props: TNavProps) => {
                 </Button>
             </div>
 
-            <CheckoutModal />
+            <Checkout />
         </nav>
     )
 }

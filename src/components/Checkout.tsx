@@ -26,7 +26,7 @@ import { TOrderUser } from './api/postOrder'
 import { useUnit } from 'effector-react';
 import { useState } from 'react';
 
-export const CheckoutModal = () => {
+export const Checkout = () => {
 
     const isCheckoutOpen = useUnit($isCheckoutOpen);
     const checkoutStep = useUnit($checkoutStep);
