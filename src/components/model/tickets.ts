@@ -3,9 +3,9 @@ import { createStore, sample } from "effector";
 import { fetchTicketsFx } from "../api/fetchTickets";
 import { fetchEventFx } from "../api/fetchEvent";
 
-import type { TicketsResponse } from "../api/fetchTickets";
+import type { TTicketsResponse } from "../api/fetchTickets";
 
-export const $tickets = createStore<TicketsResponse | null>(null)
+export const $tickets = createStore<TTicketsResponse | null>(null)
     .on(fetchTicketsFx.doneData, (_, data) => data)
 
 sample({
