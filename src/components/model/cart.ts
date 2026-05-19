@@ -1,6 +1,4 @@
-import { createEvent, createStore, sample } from 'effector';
-
-import { createOrderFx } from '../api/postOrder'
+import { createEvent, createStore } from 'effector';
 
 export type TCartItem = {
     seatId: string,
@@ -37,16 +35,3 @@ $cartStore
         totalPrice: cart.totalPrice - itemToRemove.price,
         quantity: cart.quantity - 1
     }))
-
-
-// after success -> reset cart
-sample({
-    clock: createOrderFx.done,
-    source: $cartStore,
-    fn: () => ({
-        inCart: [],
-        totalPrice: 0,
-        quantity: 0,
-    }),
-    target: $cartStore
-})
