@@ -46,8 +46,7 @@ const DialogContent = React.forwardRef<
         "sm:rounded-lg",
         "max-w-[calc(100%-2rem)] min-w-0",
 
-        "bottom-0 top-auto translate-y-0 rounded-t-lg rounded-b-none max-w-full",
-        "md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:max-w-lg md:rounded-lg",
+        "bottom-auto top-1/2 -translate-y-1/2 max-w-lg rounded-lg",
         
         className
       )}
