@@ -55,21 +55,15 @@ export const Seat = React.forwardRef<HTMLDivElement, TSeatProps>((props, ref) =>
 				<p>{isVipPrice} Kč</p>
 
 				<footer className="flex flex-col gap-1.5 mt-4">{
-					props.status === 'taken'
-						? (
-							<Button variant="outline" size="sm" disabled>
-								Taken
-							</Button>
-						)
-						: isInCart ? (
-							<Button variant="destructive" size="sm" onClick={() => removeFromCart(item)}>
-								Remove from cart
-							</Button>
-						) : (
-							<Button variant="default" size="sm" onClick={() => addToCart(item)}>
-								Add to cart
-							</Button>
-						)
+					isInCart ? (
+						<Button variant="destructive" size="sm" onClick={() => removeFromCart(item)}>
+							Remove from cart
+						</Button>
+					) : (
+						<Button variant="default" size="sm" onClick={() => addToCart(item)}>
+							Add to cart
+						</Button>
+					)
 				}</footer>
 			</PopoverContent>
 		</Popover>
