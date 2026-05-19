@@ -1,3 +1,5 @@
+import { cn } from "./lib/utils";
+
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 
@@ -16,7 +18,11 @@ type TCalendarEvent = {
     location?: string,
 }
 
-export const Aside = () => {
+type TAsideProps = {
+    className: string
+}
+
+export const Aside = ({className}: TAsideProps) => {
 
     const event = useUnit($event);
 
@@ -44,9 +50,9 @@ export const Aside = () => {
     const googleUrl = google(calendarEvent)
 
     return (
-        <aside className="w-full max-w-sm bg-gray-100 rounded-md shadow-sm p-3 flex flex-col gap-2">
+        <aside className={cn("w-full max-w-sm [@media(max-width:768px)]:max-w-full bg-gray-100 rounded-md shadow-sm p-3 flex flex-col gap-2", className)}>
             {/* event header image placeholder */}
-            <div className="bg-zinc-100 rounded-md h-32" >
+            <div className="bg-zinc-100 rounded-md h-50" >
                 <img src={event?.headerImageUrl} alt={event?.namePub} className="w-full h-full object-cover" />
             </div>
             {/* event name */}
@@ -58,8 +64,8 @@ export const Aside = () => {
                 {event?.dateFrom ? new Date(event.dateFrom).toLocaleString('cs-CZ') : ''} - {event?.dateTo ? new Date(event.dateTo).toLocaleString('cs-CZ') : ''}
             </p>
             {/* add to calendar button */}
-            <Button variant="default" className="mt-2">
-                <a href={googleUrl} target="_blank" rel="noopener noreferrer">Add to calendar</a>
+            <Button variant="default" className="mt-2 relative">
+                <a className="w-full h-full flex items-center justify-center" href={googleUrl} target="_blank" rel="noopener noreferrer">Add to calendar</a>
             </Button>
         </aside>
     )

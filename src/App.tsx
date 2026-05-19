@@ -60,24 +60,25 @@ function App() {
 			{/* main body (wrapper) */}
 			<main className="grow flex flex-col justify-center">
 				{/* inner content */}
-				<div className="max-w-screen-lg m-auto p-4 flex items-start grow gap-3 w-full">
+				<div className="max-w-screen-lg mx-auto flex [@media(max-width:768px)]:flex-col-reverse items-center px-2.5 gap-3 w-full">
 					{/* seating card */}
-					<div className="bg-gray-100 rounded-md grow self-stretch shadow-sm" style={{}}>
+					<div className="bg-gray-100 rounded-md grow self-stretch shadow-sm overflow-x-auto">
 						{/*	seating map */}
 						{
 							grid.length > 0
 								? grid.map((row, rowIndex) => {
-									return <div key={rowIndex} className="flex items-center justify-center gap-2 mb-2">
+									return <div key={rowIndex} className="flex items-center justify-center gap-2 mb-2 min-w-max [@media(max-width:768px)]:gap-0.5">
 										{
 											row.seats?.map((seat, seatIndex) => {
-												return <Seat	
+												return <Seat
 													seatId={seat.seatData?.seatId}
 													ticketTypeId={seat.seatData?.ticketTypeId}
 													key={`${rowIndex}-${seatIndex}`}
 													row={row.seatRow}
 													place={seat.place}
 													status={seat.status}
-													className={`w-8 h-8 rounded flex items-center justify-center text-xs}`}
+													className={`w-8 h-8 rounded flex items-center justify-center text-xs
+													}`}
 												/>
 											})
 										}
@@ -87,9 +88,9 @@ function App() {
 								<div className="flex flex-col gap-2 p-4">
 									{[1, 2, 3, 4, 5, 6].map(i => (
 										<div key={i} className="flex justify-center gap-2">
-											{[1, 2, 3, 4, 5, 6, 7, 8].map(j => (
+											{[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
 												<div
-													key={j}
+													key={i}
 													className="w-8 h-8 rounded bg-gray-200 animate-pulse"
 												/>
 											))}
@@ -108,7 +109,7 @@ function App() {
 						</div>
 					</div>
 
-					<Aside />
+					<Aside className='grow' />
 
 				</div>
 			</main>

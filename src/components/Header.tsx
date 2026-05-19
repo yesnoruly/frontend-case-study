@@ -14,22 +14,18 @@ export const Header = () => {
     const isOpen = useUnit($isAuthOpen)
     const isLoggedIn = useUnit($isLoggedIn);
     const user = useUnit($user);
-    
+
     const username = [user?.firstName, user?.lastName].filter(Boolean).join(' ');
 
 
     return (
         <nav className="sticky bg-gray-100/95 top-0 left-0 right-0 flex justify-center">
             {/* inner content */}
-            <div className="max-w-screen-lg p-4 grow flex items-center justify-between gap-3">
-                {/* application/author image/logo placeholder */}
-                <div className="max-w-[250px] w-full flex">
-                    <div className="bg-gray-300 rounded-md size-12" />
-                </div>
+            <div className="max-w-screen-lg p-4 grow flex justify-between gap-3">
                 {/* app/author title/name placeholder */}
-                <div className="bg-gray-300 rounded-md h-8 w-[200px]" />
+                <div className="flex-1 flex items-center"><span>KR</span></div>
                 {/* user menu */}
-                <div className="max-w-[250px] w-full flex justify-end">
+                <div className="flex justify-end">
                     {
                         isLoggedIn ? (
                             <DropdownMenu>
