@@ -11,7 +11,7 @@ import { Error } from './CheckoutSteps/Error'
 
 // Stores
 import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckoutStep } from './model/checkout';
-import { $cartStore } from './model/cart'
+import { $cart } from './model/cart'
 import { $event } from './model/event'
 import { $user, $isLoggedIn } from './model/auth'
 
@@ -34,7 +34,7 @@ export const Checkout = () => {
     const user = useUnit($user)
     const isLoggedIn = useUnit($isLoggedIn)
 
-    const cartStore = useUnit($cartStore);
+    const cart = useUnit($cart);
 
     const event = useUnit($event)
 
@@ -60,7 +60,7 @@ export const Checkout = () => {
 
         createOrderFx({
             eventId: event.eventId,
-            tickets: cartStore.inCart.map(item => ({
+            tickets: cart.inCart.map(item => ({
                 ticketTypeId: item.ticketTypeId,
                 seatId: item.seatId,
             })),
@@ -85,8 +85,8 @@ export const Checkout = () => {
 
                 {checkoutStep === 'options' && (
                     <Options
-                        quantity={cartStore.quantity}
-                        totalPrice={cartStore.totalPrice}
+                        quantity={cart.quantity}
+                        totalPrice={cart.totalPrice}
                         onLogin={() => setCheckoutStep('login')}
                         onGuest={() => setCheckoutStep('guest')}
                     />
@@ -107,18 +107,18 @@ export const Checkout = () => {
                 {checkoutStep === 'payment' && (
                     <Payment
                         onPay={handlePay}
-                        totalPrice={cartStore.totalPrice}
+                        totalPrice={cart.totalPrice}
                     />
                 )}
                 {checkoutStep === 'success' && (
                     <Success
                         onClose={closeCheckout}
-                        inCart={cartStore.inCart}
+                        inCart={cart.inCart}
                         firstName={user?.firstName || guestData?.firstName || ''}
                         lastName={user?.lastName || guestData?.lastName || ''}
                         email={user?.email || guestData?.email || ''}
-                        totalPrice={cartStore.totalPrice}
-                        quantity={cartStore.quantity}
+                        totalPrice={cart.totalPrice}
+                        quantity={cart.quantity}
                     />
                 )}
                 {checkoutStep === 'error' && (

@@ -9,13 +9,13 @@ export type TCartItem = {
     isVip: boolean,
 }
 
-export type TCartStoreType = {
+export type TCart = {
     inCart: TCartItem[],
     totalPrice: number,
     quantity: number,
 }
 
-export const $cartStore = createStore<TCartStoreType>({
+export const $cart = createStore<TCart>({
     inCart: [],
     totalPrice: 0,
     quantity: 0,
@@ -24,7 +24,7 @@ export const $cartStore = createStore<TCartStoreType>({
 export const addToCart = createEvent<TCartItem>();
 export const removeFromCart = createEvent<TCartItem>();
 
-$cartStore
+$cart
     .on(addToCart, (cart, newItem) => ({
         inCart: [...cart.inCart, newItem],
         totalPrice: cart.totalPrice + newItem.price,

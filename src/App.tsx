@@ -7,7 +7,7 @@ import { Nav } from './components/Nav';
 import { useUnit } from 'effector-react';
 
 import { $tickets } from '@/components/model/tickets.ts';
-import { $cartStore } from './components/model/cart.ts'
+import { $cart } from './components/model/cart.ts'
 import type { Seat as SeatType, TicketsResponse as TicketsResponseType } from './components/api/fetchTickets.ts';
 
 type TGridSeat = {
@@ -50,7 +50,7 @@ function App() {
 
 	const grid: TGridRow[] = tickets ? buildGrid(tickets) : [];
 
-	const cartStore = useUnit($cartStore);
+	const cart = useUnit($cart);
 
 	return (
 		<div className="flex flex-col grow bg-gray-100 bg-zinc-b text-black">
@@ -114,7 +114,7 @@ function App() {
 				</div>
 			</main>
 
-			<Nav totalTickets={cartStore.quantity} totalPrice={cartStore.totalPrice} />
+			<Nav totalTickets={cart.quantity} totalPrice={cart.totalPrice} />
 		</div>
 	);
 }

@@ -6,7 +6,7 @@ import React from 'react';
 import { useUnit } from 'effector-react';
 
 import { $vipTicketTypeId, $ticketPrice } from './model/tickets.ts';
-import { $cartStore, addToCart, removeFromCart } from './model/cart.ts'
+import { $cart, addToCart, removeFromCart } from './model/cart.ts'
 
 type TSeatProps = {
 	place?: number,
@@ -19,9 +19,9 @@ type TSeatProps = {
 
 export const Seat = React.forwardRef<HTMLDivElement, TSeatProps>((props, ref) => {
 
-	const [vipTicketTypeId, ticketPrice, cartStore] = useUnit([$vipTicketTypeId, $ticketPrice, $cartStore])
+	const [vipTicketTypeId, ticketPrice, cart] = useUnit([$vipTicketTypeId, $ticketPrice, $cart])
 
-	const isInCart = cartStore.inCart.some(item => item.seatId === props.seatId)
+	const isInCart = cart.inCart.some(item => item.seatId === props.seatId)
 	const isVip = props.ticketTypeId === vipTicketTypeId;
 	const isVipPrice = isVip ? ticketPrice.vipPrice : ticketPrice.regularPrice;
 
