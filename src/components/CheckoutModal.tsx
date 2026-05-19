@@ -72,13 +72,13 @@ export const CheckoutModal = () => {
 
         <Dialog open={isCheckoutOpen} onOpenChange={open => open ? openCheckout() : closeCheckout()}>
             <DialogContent className='bg-black'>
-                <DialogHeader>
+                <DialogHeader className='items-center'>
                     <DialogTitle>
                         {checkoutStep === 'options' && 'Choose a login option'}
                         {checkoutStep === 'login' && 'Log In'}
                         {checkoutStep === 'guest' && 'Log In as guest'}
                         {checkoutStep === 'payment' && 'Payment information'}
-                        {checkoutStep === 'success' && 'DONE!'}
+                        {checkoutStep === 'success' && 'The payment was successful!'}
                         {checkoutStep === 'error' && 'Oops...'}
                     </DialogTitle>
                 </DialogHeader>
@@ -113,6 +113,12 @@ export const CheckoutModal = () => {
                 {checkoutStep === 'success' && (
                     <Success
                         onClose={closeCheckout}
+                        inCart={cartStore.inCart}
+                        firstName={user?.firstName || guestData?.firstName || ''}
+                        lastName={user?.lastName || guestData?.lastName || ''}
+                        email={user?.email || guestData?.email || ''}
+                        totalPrice={cartStore.totalPrice}
+                        quantity={cartStore.quantity}
                     />
                 )}
                 {checkoutStep === 'error' && (
