@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 
 // Steps
 import { Options } from './CheckoutSteps/Options'
-import { Guest, TGuestData } from './CheckoutSteps/Guest'
+import { Guest, TAsGuest } from './CheckoutSteps/Guest'
 import { Login } from './CheckoutSteps/Login'
 import { Payment } from './CheckoutSteps/Payment'
 import { Success } from './CheckoutSteps/Success'
@@ -40,14 +40,14 @@ export const Checkout = () => {
 
     const loginLoading = useUnit(loginFx.pending)
 
-    const [guestData, setGuestData] = useState<TGuestData | null>(null)
+    const [asGuest, setAsGuest] = useState<TAsGuest | null>(null)
 
     const handleLogin = (email: string, password: string) => {
         loginFx({ email, password })
     }
 
-    const handleGuestContinue = (data: TGuestData) => {
-        setGuestData(data)
+    const handleGuestContinue = (data: TAsGuest) => {
+        setAsGuest(data)
         setCheckoutStep('payment')
     }
 
@@ -56,7 +56,7 @@ export const Checkout = () => {
 
         const customer = isLoggedIn
             ? { firstName: user!.firstName, lastName: user!.lastName, email: user!.email }
-            : guestData as TOrderUser;
+            : asGuest as TOrderUser;
 
         createOrderFx({
             eventId: event.eventId,
@@ -114,9 +114,9 @@ export const Checkout = () => {
                     <Success
                         onClose={closeCheckout}
                         inCart={cart.inCart}
-                        firstName={user?.firstName || guestData?.firstName || ''}
-                        lastName={user?.lastName || guestData?.lastName || ''}
-                        email={user?.email || guestData?.email || ''}
+                        firstName={user?.firstName || asGuest?.firstName || ''}
+                        lastName={user?.lastName || asGuest?.lastName || ''}
+                        email={user?.email || asGuest?.email || ''}
                         totalPrice={cart.totalPrice}
                         quantity={cart.quantity}
                     />

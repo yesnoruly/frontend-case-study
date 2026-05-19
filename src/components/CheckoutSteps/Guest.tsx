@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-export type TGuestData = {
+export type TAsGuest = {
     firstName: string,
     lastName: string,
     email: string
 }
 
 type TGuestProps = {
-    onSubmit: (data: TGuestData) => void,
+    onSubmit: (data: TAsGuest) => void,
     onBack: () => void
 }
 
