@@ -1,8 +1,10 @@
 import './App.css';
+
 import { Seat } from '@/components/Seat.tsx';
 import { Header } from './components/Header';
 import { Aside } from './components/Aside';
 import { Nav } from './components/Nav';
+import { GridSkeleton } from './components/ui/grid-skeleton.tsx';
 
 import { useUnit } from 'effector-react';
 
@@ -84,19 +86,8 @@ function App() {
 										}
 									</div>
 								})
-								:
-								<div className="flex flex-col gap-2 p-4">
-									{[1, 2, 3, 4, 5, 6].map(i => (
-										<div key={i} className="flex justify-center gap-2">
-											{[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-												<div
-													key={i}
-													className="w-8 h-8 rounded bg-gray-200 animate-pulse"
-												/>
-											))}
-										</div>
-									))}
-								</div>
+								: <GridSkeleton />
+								
 						}
 
 						<div className="flex-grow-1">
