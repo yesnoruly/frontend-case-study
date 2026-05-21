@@ -14,6 +14,7 @@ import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckou
 import { $cart } from './model/cart'
 import { $event } from './model/event'
 import { $user, $isLoggedIn } from './model/auth'
+import { $orderResult, $orderError } from './model/order'
 
 // Effects
 import { createOrderFx } from './api/postOrder'
@@ -28,6 +29,7 @@ import { useState } from 'react';
 
 export const Checkout = () => {
 
+    // connecting effector stores with react
     const isCheckoutOpen = useUnit($isCheckoutOpen);
     const checkoutStep = useUnit($checkoutStep);
 
@@ -40,6 +42,11 @@ export const Checkout = () => {
 
     const loginLoading = useUnit(loginFx.pending)
 
+    const orderResult = useUnit($orderResult)
+
+    const orderError = useUnit($orderError)
+
+    // for guest step using temporary state
     const [asGuest, setAsGuest] = useState<TAsGuest | null>(null)
 
     const handleLogin = (email: string, password: string) => {
@@ -54,10 +61,12 @@ export const Checkout = () => {
     const handlePay = () => {
         if (!event) return
 
-        const customer = isLoggedIn
-            ? { firstName: user!.firstName, lastName: user!.lastName, email: user!.email }
+        // as guest or existing user
+        const customer = isLoggedIn && user
+            ? { firstName: user.firstName, lastName: user.lastName, email: user.email }
             : asGuest as TOrderUser;
 
+        // then send all order data to server
         createOrderFx({
             eventId: event.eventId,
             tickets: cart.inCart.map(item => ({
@@ -78,7 +87,7 @@ export const Checkout = () => {
                         {checkoutStep === 'login' && 'Log In'}
                         {checkoutStep === 'guest' && 'Log In as guest'}
                         {checkoutStep === 'payment' && 'Payment information'}
-                        {checkoutStep === 'success' && 'The payment was successful!'}
+                        {checkoutStep === 'success' && orderResult?.message}
                         {checkoutStep === 'error' && 'Oops...'}
                     </DialogTitle>
                 </DialogHeader>
@@ -114,15 +123,16 @@ export const Checkout = () => {
                     <Success
                         onClose={closeCheckout}
                         inCart={cart.inCart}
-                        firstName={user?.firstName || asGuest?.firstName || ''}
-                        lastName={user?.lastName || asGuest?.lastName || ''}
-                        email={user?.email || asGuest?.email || ''}
+                        firstName={orderResult?.user.firstName || asGuest?.firstName || ''}
+                        lastName={orderResult?.user.lastName || asGuest?.lastName || ''}
+                        email={orderResult?.user.email || asGuest?.email || ''}
                         totalPrice={cart.totalPrice}
                         quantity={cart.quantity}
                     />
                 )}
                 {checkoutStep === 'error' && (
                     <Error
+                        message={orderError ?? 'Unknown error'}
                         onBack={closeCheckout}
                         onRetry={() => setCheckoutStep('payment')}
                     />
