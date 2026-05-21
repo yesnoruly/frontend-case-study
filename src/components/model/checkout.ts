@@ -8,7 +8,7 @@ import { loginFx } from '../api/postLogin'
 import { createOrderFx } from '../api/postOrder'
 
 // Types
-export type TCheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error'
+export type TCheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error' | 'loginError'
 
 // Stores
 export const $isCheckoutOpen = createStore(false)
@@ -53,9 +53,16 @@ sample({
     target: $checkoutStep,
 })
 
-// when failed -> throw error
+// when failed -> throw error step
 sample({
     clock: createOrderFx.fail,
     fn: () => 'error' as TCheckoutStep,
     target: $checkoutStep,
+})
+
+// when login failed -> throw login error 
+sample({
+    clock: loginFx.fail,
+    fn: () => 'loginError' as TCheckoutStep,
+    target: $checkoutStep
 })

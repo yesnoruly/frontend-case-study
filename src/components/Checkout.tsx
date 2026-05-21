@@ -13,7 +13,7 @@ import { Error } from './CheckoutSteps/Error'
 import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckoutStep } from './model/checkout';
 import { $cart } from './model/cart'
 import { $event } from './model/event'
-import { $user, $isLoggedIn } from './model/auth'
+import { $user, $loginError, $isLoggedIn } from './model/auth'
 import { $orderResult, $orderError } from './model/order'
 
 // Effects
@@ -34,6 +34,8 @@ export const Checkout = () => {
     const checkoutStep = useUnit($checkoutStep);
 
     const user = useUnit($user)
+
+    const loginError = useUnit($loginError)
     
     const isLoggedIn = useUnit($isLoggedIn)
 
@@ -87,6 +89,7 @@ export const Checkout = () => {
                         {checkoutStep === 'options' && 'Choose a login option'}
                         {checkoutStep === 'login' && 'Log In'}
                         {checkoutStep === 'guest' && 'Log In as guest'}
+                        {checkoutStep === 'loginError' && 'Oops...'}
                         {checkoutStep === 'payment' && 'Payment information'}
                         {checkoutStep === 'success' && orderResult?.message}
                         {checkoutStep === 'error' && 'Oops...'}
@@ -112,6 +115,13 @@ export const Checkout = () => {
                     <Guest
                         onSubmit={handleGuestContinue}
                         onBack={() => setCheckoutStep('options')}
+                    />
+                )}
+                {checkoutStep === 'loginError' && (
+                    <Error
+                        message={loginError ?? 'Unknown error'}
+                        onBack={closeCheckout}
+                        onRetry={() => setCheckoutStep('options')}
                     />
                 )}
                 {checkoutStep === 'payment' && (

@@ -17,6 +17,10 @@ export const $user = createStore<TUser | null>(null)
     .on(loginFx.doneData, (_, data) => data.user)
     .on(logout, () => null)
 
+export const $loginError = createStore<string | null>(null)
+    .on(loginFx.failData, (_, error) => error.message)
+    .reset(loginFx, closeAuth)
+
 export const $isAuthOpen = createStore(false) 
 
 export const $isLoggedIn = $user.map(user => user !== null)
