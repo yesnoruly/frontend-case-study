@@ -1,5 +1,6 @@
 import { createEffect } from "effector"
 
+// Types
 export type TOrderTicket = {
     ticketTypeId: string,
     seatId: string
@@ -20,9 +21,12 @@ export type TOrderInput = {
 export type TOrderResponse = {
     message: string,
     orderId: string,
-    totalAmount: number
+    totalAmount: number,
+    tickets: TOrderTicket,
+    user: TOrderUser
 }
 
+// Post order effect
 export const createOrderFx = createEffect<TOrderInput, TOrderResponse>(data =>
     fetch('https://nfctron-frontend-seating-case-study-2024.vercel.app/order', {
         method: 'POST',

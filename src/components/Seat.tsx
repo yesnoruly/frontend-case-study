@@ -1,12 +1,18 @@
+// UI
 import { Button } from '@/components/ui/button.tsx';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover.tsx';
-import { cn } from '@/components/lib/utils.ts';
+
+// utils
 import React from 'react';
-
 import { useUnit } from 'effector-react';
+import { cn } from '@/components/lib/utils.ts';
 
+// Stores and events
 import { $vipTicketTypeId, $ticketPrice } from './model/tickets.ts';
 import { $cart, addToCart, removeFromCart } from './model/cart.ts'
+
+// Types
+import { TCartItem } from './model/cart.ts';
 
 type TSeatProps = {
 	place?: number,
@@ -19,19 +25,21 @@ type TSeatProps = {
 
 export const Seat = React.forwardRef<HTMLDivElement, TSeatProps>((props, ref) => {
 
+	// destructuring effector stores and connecting with react
 	const [vipTicketTypeId, ticketPrice, cart] = useUnit([$vipTicketTypeId, $ticketPrice, $cart])
 
 	const isInCart = cart.inCart.some(item => item.seatId === props.seatId)
 	const isVip = props.ticketTypeId === vipTicketTypeId;
 	const isVipPrice = isVip ? ticketPrice.vipPrice : ticketPrice.regularPrice;
 
-	const item = {
-		seatId: props.seatId!,
-		ticketTypeId: props.ticketTypeId!,
-		place: props.place!,
-		row: props.row!,
-		price: isVipPrice!,
-		isVip: isVip!,
+	// unit object data which is then passed to the event handler - removeFromCart / addToCart
+	const item: TCartItem = {
+		seatId: props.seatId ?? '',
+		ticketTypeId: props.ticketTypeId ?? '',
+		place: props.place ?? 0,
+		row: props.row ?? 0,
+		price: isVipPrice ?? 0,
+		isVip: isVip ?? false,
 	}
 
 	return (

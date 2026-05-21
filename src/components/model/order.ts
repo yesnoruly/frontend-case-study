@@ -3,7 +3,7 @@ import { createStore } from 'effector'
 // Types
 import type {TOrderResponse } from '../api/postOrder';
 
-// Post order data 
+// Effect
 import { createOrderFx } from '../api/postOrder';
 
 // Event

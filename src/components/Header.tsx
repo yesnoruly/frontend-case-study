@@ -1,20 +1,25 @@
+// UI
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { Dialog } from '@/components/ui/dialog'
 import { Button } from "./ui/button";
 
+// Utils
 import { useUnit } from 'effector-react'
 
+// Stores an events
 import { $isLoggedIn, $user, logout, $isAuthOpen, openAuth, closeAuth } from "./model/auth";
 
 import { LoginForm } from './LoginForm';
 
 export const Header = () => {
 
+    // connecting effector stores with react
     const isOpen = useUnit($isAuthOpen)
     const isLoggedIn = useUnit($isLoggedIn);
     const user = useUnit($user);
 
+    // joined first and last name
     const username = [user?.firstName, user?.lastName].filter(Boolean).join(' ');
 
     return (

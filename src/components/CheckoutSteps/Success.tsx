@@ -32,7 +32,7 @@ export const Success = ({ onClose, firstName, lastName, email, totalPrice, quant
                 })}
             </ul>
             <p className="text-sm">Total seats: {quantity}</p>
-            <p className="text-sm">Total price: {totalPrice}</p>
+            <p className="text-sm">Total price: {totalPrice} Kč</p>
             <Button onClick={onClose}>Close</Button>
         </div>
     )

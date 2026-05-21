@@ -1,5 +1,6 @@
 import { createEvent, createStore } from 'effector';
 
+// Types
 export type TCartItem = {
     seatId: string,
     ticketTypeId: string,
@@ -15,23 +16,25 @@ export type TCart = {
     quantity: number,
 }
 
+// Stores
 export const $cart = createStore<TCart>({
     inCart: [],
     totalPrice: 0,
     quantity: 0,
 })
 
+// Events
 export const addToCart = createEvent<TCartItem>();
 export const removeFromCart = createEvent<TCartItem>();
 
 $cart
     .on(addToCart, (cart, newItem) => ({
-        inCart: [...cart.inCart, newItem],
-        totalPrice: cart.totalPrice + newItem.price,
-        quantity: cart.quantity + 1
+        inCart: [...cart.inCart, newItem], // add a new ticket
+        totalPrice: cart.totalPrice + newItem.price, // total ticket price
+        quantity: cart.quantity + 1 // increase quantity
     }))
     .on(removeFromCart, (cart, itemToRemove) => ({
-        inCart: cart.inCart.filter(item => item.seatId !== itemToRemove.seatId),
-        totalPrice: cart.totalPrice - itemToRemove.price,
-        quantity: cart.quantity - 1
+        inCart: cart.inCart.filter(item => item.seatId !== itemToRemove.seatId), // remove selected item
+        totalPrice: cart.totalPrice - itemToRemove.price, // remove price of that ticket
+        quantity: cart.quantity - 1 // decrease quantity
     }))

@@ -34,6 +34,7 @@ export const Checkout = () => {
     const checkoutStep = useUnit($checkoutStep);
 
     const user = useUnit($user)
+    
     const isLoggedIn = useUnit($isLoggedIn)
 
     const cart = useUnit($cart);

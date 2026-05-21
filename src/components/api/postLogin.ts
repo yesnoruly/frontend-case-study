@@ -1,5 +1,6 @@
 import { createEffect } from "effector"
 
+// Types
 export type TUser = {
     firstName: 'string';
     lastName: 'string',
@@ -16,6 +17,7 @@ type TLoginInput = {
     password: string,
 }
 
+// Post login data
 export const loginFx = createEffect<TLoginInput, TLoginResponse>((data) =>
     fetch('https://nfctron-frontend-seating-case-study-2024.vercel.app/login', {
         method: 'POST',

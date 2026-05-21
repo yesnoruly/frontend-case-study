@@ -1,16 +1,22 @@
+// Styles
 import './App.css';
 
+// Components
 import { Seat } from '@/components/Seat.tsx';
 import { Header } from './components/Header';
 import { Aside } from './components/Aside';
 import { Nav } from './components/Nav';
 import { GridSkeleton } from './components/ui/grid-skeleton.tsx';
 
-import { useUnit } from 'effector-react';
-
+// Stores
 import { $tickets } from '@/components/model/tickets.ts';
 import { $cart } from './components/model/cart.ts'
+
+// Types
 import type { TSeat, TTicketsResponse } from './components/api/fetchTickets.ts';
+
+// Tools
+import { useUnit } from 'effector-react';
 
 type TGridSeat = {
 	place: number,
@@ -25,8 +31,12 @@ type TGridRow = {
 
 function App() {
 
+	// connecting effector stores with react
 	const tickets = useUnit($tickets);
+	
+	const cart = useUnit($cart);
 
+	// Finding empty cells in grid and adding to them 'taken' status
 	function buildRowMap(seats: TSeat[], maxSeats: number): TGridSeat[] {
 		const existingMap = new Map(seats.map(seat => [seat.place, seat]))
 
@@ -40,7 +50,7 @@ function App() {
 		})
 	}
 
-	function buildGrid(tickets: TTicketsResponse): TGridRow[] {
+	function buildGrid(tickets: TTicketsResponse) {
 
 		const max_seats_in_row = Math.max(...tickets.seatRows.flatMap(row => row.seats.map(s => s.place)), 0)
 
@@ -51,8 +61,6 @@ function App() {
 	}
 
 	const grid: TGridRow[] = tickets ? buildGrid(tickets) : [];
-
-	const cart = useUnit($cart);
 
 	return (
 		<div className="flex flex-col grow bg-gray-100 bg-zinc-b text-black">
@@ -67,9 +75,9 @@ function App() {
 					<div className="bg-gray-100 rounded-md grow self-stretch shadow-sm overflow-x-auto">
 						{/*	seating map */}
 						{
-							grid.length > 0
-								? grid.map((row, rowIndex) => {
-									return <div key={rowIndex} className="flex items-center justify-center gap-2 mb-2 min-w-max [@media(max-width:768px)]:gap-0.5">
+							grid.length
+								? grid.map((row, rowIndex) => (
+									<div key={rowIndex} className="flex items-center justify-center gap-2 mb-2 min-w-max [@media(max-width:768px)]:gap-0.5">
 										{
 											row.seats?.map((seat, seatIndex) => {
 												return <Seat
@@ -85,9 +93,9 @@ function App() {
 											})
 										}
 									</div>
-								})
+								))
 								: <GridSkeleton />
-								
+
 						}
 
 						<div className="flex-grow-1">

@@ -8,19 +8,18 @@ type TNavProps = {
     totalPrice?: number
 }
 
-export const Nav = (props: TNavProps) => {
+export const Nav = ({totalTickets, totalPrice}: TNavProps) => {
     return (
         <nav className="bg-gray-100 text-black flex justify-center">
-            {/* inner content */}
+
             <div className="max-w-screen-lg p-6 flex justify-between items-center gap-4 grow">
-                {/* total in cart state */}
+
                 <div className="flex flex-col">
-                    <span>Total for {props.totalTickets} tickets</span>
-                    <span className="text-2xl font-semibold">{props.totalPrice || 0} CZK</span>
+                    <span>Total for {totalTickets} tickets</span>
+                    <span className="text-2xl font-semibold">{totalPrice || 0} CZK</span>
                 </div>
 
-                {/* checkout button */}
-                <Button variant="default" onClick={() => openCheckout()} disabled={props.totalTickets === 0}>
+                <Button variant="default" onClick={() => openCheckout()} disabled={totalTickets === 0}>
                     Checkout now
                 </Button>
             </div>

@@ -1,26 +1,32 @@
 import { createStore, createEvent, sample } from 'effector'
 
+// Stores
 import { $isLoggedIn } from './auth'
 
+// Effects
 import { loginFx } from '../api/postLogin'
 import { createOrderFx } from '../api/postOrder'
 
+// Types
 export type TCheckoutStep = 'options' | 'guest' | 'login' | 'payment'  | 'success' | 'error'
 
+// Stores
 export const $isCheckoutOpen = createStore(false)
 export const $checkoutStep = createStore<TCheckoutStep>('payment');
 
+// Events
 export const openCheckout = createEvent();
 export const closeCheckout = createEvent();
 export const setCheckoutStep = createEvent<TCheckoutStep>();
 
+// Open and close checkout modal
 $isCheckoutOpen
     .on(openCheckout, () => true)
     .on(closeCheckout, () => false)
 
 $checkoutStep
-  .on(setCheckoutStep, (_, step) => step)
-  .reset(closeCheckout);
+  .on(setCheckoutStep, (_, step) => step) // switching checkout steps
+  .reset(closeCheckout); // if checkout close reset checkoutStep value
 
 
 // if user already logged in -> payment step
@@ -31,7 +37,7 @@ sample({
     target: $checkoutStep,
 })
 
-// after checkout -> to payment step
+// after successfull login -> to payment step
 sample({
     clock: loginFx.done,
     source: $isCheckoutOpen,
@@ -40,14 +46,14 @@ sample({
     target: $checkoutStep
 })
 
-// When data is successfully receive -> succes step
+// When data is successfully sent -> success step
 sample({
     clock: createOrderFx.done,
     fn: () => 'success' as TCheckoutStep,
     target: $checkoutStep,
 })
 
-// when fail -> throw error
+// when failed -> throw error
 sample({
     clock: createOrderFx.fail,
     fn: () => 'error' as TCheckoutStep,

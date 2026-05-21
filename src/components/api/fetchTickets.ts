@@ -1,5 +1,6 @@
 import { createEffect } from 'effector';
 
+// Types
 export type TTicketTypeId = {
     id: string,
     name: string,
@@ -22,6 +23,8 @@ export type TTicketsResponse = {
     seatRows: TSeatRow[],
 }
 
+// Fetch tickets
 export const fetchTicketsFx = createEffect<string, TTicketsResponse>((id: string) => {
-    return fetch(`https://nfctron-frontend-seating-case-study-2024.vercel.app/event-tickets?eventId=${id}`).then(res => res.json())
+    return fetch(`https://nfctron-frontend-seating-case-study-2024.vercel.app/event-tickets?eventId=${id}`)
+        .then(res => res.json())
 })

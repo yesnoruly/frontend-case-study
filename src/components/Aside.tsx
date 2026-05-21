@@ -22,9 +22,21 @@ type TAsideProps = {
     className: string
 }
 
-export const Aside = ({className}: TAsideProps) => {
+export const Aside = ({ className }: TAsideProps) => {
 
     const event = useUnit($event);
+
+    // set event data to calendar link 
+    const calendarEvent = {
+        uid: event?.eventId,
+        title: event?.namePub,
+        description: event?.description,
+        start: event?.dateFrom,
+        end: event?.dateTo,
+        location: event?.place,
+    } as TCalendarEvent
+
+    const googleUrl = google(calendarEvent)
 
     // Skeleton
     if (!event) {
@@ -38,32 +50,21 @@ export const Aside = ({className}: TAsideProps) => {
         )
     }
 
-    const calendarEvent = {
-        uid: event?.eventId,
-        title: event?.namePub,
-        description: event?.description,
-        start: event?.dateFrom,
-        end: event?.dateTo,
-        location: event?.place,
-    } as TCalendarEvent
-
-    const googleUrl = google(calendarEvent)
-
     return (
         <aside className={cn("w-full max-w-sm [@media(max-width:768px)]:max-w-full bg-gray-100 rounded-md shadow-sm p-3 flex flex-col gap-2", className)}>
-            {/* event header image placeholder */}
+
             <div className="bg-zinc-100 rounded-md h-50" >
                 <img src={event?.headerImageUrl} alt={event?.namePub} className="w-full h-full object-cover" />
             </div>
-            {/* event name */}
+
             <h1 className="text-xl text-zinc-900 font-semibold">{event?.namePub}</h1>
-            {/* event description */}
+
             <p className="text-sm text-zinc-500">{event?.description}</p>
-            {/* Date From - To */}
+
             <p className="text-sm text-zinc-500">
                 {event?.dateFrom ? new Date(event.dateFrom).toLocaleString('cs-CZ') : ''} - {event?.dateTo ? new Date(event.dateTo).toLocaleString('cs-CZ') : ''}
             </p>
-            {/* add to calendar button */}
+
             <Button variant="default" className="mt-2 relative">
                 <a className="w-full h-full flex items-center justify-center" href={googleUrl} target="_blank" rel="noopener noreferrer">Add to calendar</a>
             </Button>

@@ -1,9 +1,12 @@
+// Ui
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 
+// Login effect api
 import { loginFx } from './api/postLogin'
 
+// Hooks
 import { useState } from 'react'
 import { useUnit } from 'effector-react'
 
@@ -11,6 +14,7 @@ export const LoginForm = () => {
 
     const loading = useUnit(loginFx.pending)
 
+    // default value for quick enter
     const [email, setEmail] = useState('frontend@nfctron.com')
     const [password, setPassword] = useState('Nfctron2025')
 
