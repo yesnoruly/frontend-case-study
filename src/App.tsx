@@ -67,13 +67,13 @@ function App() {
 
 			<Header />
 
-			{/* main body (wrapper) */}
+
 			<main className="grow flex flex-col justify-center">
-				{/* inner content */}
+
 				<div className="max-w-screen-lg mx-auto flex [@media(max-width:768px)]:flex-col-reverse items-center px-2.5 gap-3 w-full">
-					{/* seating card */}
+
 					<div className="bg-gray-100 rounded-md grow self-stretch shadow-sm overflow-x-auto">
-						{/*	seating map */}
+
 						{
 							grid.length
 								? grid.map((row, rowIndex) => (
