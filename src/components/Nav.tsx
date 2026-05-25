@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 
 import { Checkout } from "./Checkout";
-import { openCheckout } from "./model/checkout";
+import { openCheckout } from "../model/checkout";
 
 type TNavProps = {
     totalTickets?: number,

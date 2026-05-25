@@ -10,18 +10,18 @@ import { Success } from './CheckoutSteps/Success'
 import { Error } from './CheckoutSteps/Error'
 
 // Stores
-import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckoutStep } from './model/checkout';
-import { $cart } from './model/cart'
-import { $event } from './model/event'
-import { $user, $loginError, $isLoggedIn } from './model/auth'
-import { $orderResult, $orderError } from './model/order'
+import { $isCheckoutOpen, $checkoutStep, openCheckout, closeCheckout, setCheckoutStep } from '../model/checkout';
+import { $cart } from '../model/cart'
+import { $event } from '../model/event'
+import { $user, $loginError, $isLoggedIn } from '../model/auth'
+import { $orderResult, $orderError } from '../model/order'
 
 // Effects
-import { createOrderFx } from './api/postOrder'
-import { loginFx } from './api/postLogin'
+import { createOrderFx } from '../api/postOrder'
+import { loginFx } from '../api/postLogin'
 
 // Types
-import { TOrderUser } from './api/postOrder'
+import { TOrderUser } from '../api/postOrder'
 
 // Utils
 import { useUnit } from 'effector-react';

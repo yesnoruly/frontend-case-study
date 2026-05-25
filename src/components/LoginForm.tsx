@@ -4,7 +4,7 @@ import { Input } from './ui/input'
 import { Button } from './ui/button'
 
 // Login effect api
-import { loginFx } from './api/postLogin'
+import { loginFx } from '../api/postLogin'
 
 // Hooks
 import { useState } from 'react'

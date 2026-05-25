@@ -5,14 +5,14 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 // utils
 import React from 'react';
 import { useUnit } from 'effector-react';
-import { cn } from '@/components/lib/utils.ts';
+import { cn } from '@/lib/utils.ts';
 
 // Stores and events
-import { $vipTicketTypeId, $ticketPrice } from './model/tickets.ts';
-import { $cart, addToCart, removeFromCart } from './model/cart.ts'
+import { $vipTicketTypeId, $ticketPrice } from '../model/tickets.ts';
+import { $cart, addToCart, removeFromCart } from '../model/cart.ts'
 
 // Types
-import { TCartItem } from './model/cart.ts';
+import { TCartItem } from '../model/cart.ts';
 
 type TSeatProps = {
 	place?: number,

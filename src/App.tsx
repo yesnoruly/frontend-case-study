@@ -9,11 +9,11 @@ import { Nav } from './components/Nav';
 import { GridSkeleton } from './components/ui/grid-skeleton.tsx';
 
 // Stores
-import { $tickets } from '@/components/model/tickets.ts';
-import { $cart } from './components/model/cart.ts'
+import { $tickets } from '@/model/tickets.ts';
+import { $cart } from './model/cart.ts'
 
 // Types
-import type { TSeat, TTicketsResponse } from './components/api/fetchTickets.ts';
+import type { TSeat, TTicketsResponse } from './api/fetchTickets.ts';
 
 // Tools
 import { useUnit } from 'effector-react';

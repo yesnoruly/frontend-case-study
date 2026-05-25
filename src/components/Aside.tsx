@@ -1,11 +1,11 @@
-import { cn } from "./lib/utils";
+import { cn } from "../lib/utils";
 
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 
 import { google } from 'calendar-link'
 
-import { $event } from "./model/event";
+import { $event } from "../model/event";
 
 import { useUnit } from "effector-react";
 

@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 import { useUnit } from 'effector-react'
 
 // Stores an events
-import { $isLoggedIn, $user, logout, $isAuthOpen, openAuth, closeAuth } from "./model/auth";
+import { $isLoggedIn, $user, logout, $isAuthOpen, openAuth, closeAuth } from "../model/auth";
 
 import { LoginForm } from './LoginForm';
 
