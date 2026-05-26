@@ -2,9 +2,9 @@ import { createEffect } from "effector"
 
 // Types
 export type TUser = {
-    firstName: 'string';
-    lastName: 'string',
-    email: 'string',
+    firstName: string;
+    lastName: string,
+    email: string,
 }
 
 type TLoginResponse = {
